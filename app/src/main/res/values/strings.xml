@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Groceries</string>
+    <string name="barcode_value">Código de barras</string>
+    <string name="description_value">Descripción</string>
+    <string name="brand_value">Marca</string>
+    <string name="cost_value">Precio de compra</string>
+    <string name="price_value">Precio de venta</string>
+    <string name="stock_value">Stock mínimo</string>
+    <string name="save_value">Guardar</string>
+    <string name="update_value">Actualizar</string>
+    <string name="delete_value">Eliminar</string>
+</resources>
