@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 if (productDAO.insertProduct(product) != -1){
                     Toast.makeText(MainActivity.this, "Producto Insertado Exítosamente", Toast.LENGTH_SHORT).show();
                     updateList();
+                    clearFields();
                 } else {
                     Toast.makeText(MainActivity.this, "Servicio no disponible, vuelva a intentarlo", Toast.LENGTH_SHORT).show();
                 }
@@ -67,5 +68,16 @@ public class MainActivity extends AppCompatActivity {
         );
 
         lvProducts.setAdapter(adapter);
+    }
+
+    public void clearFields(){
+        txtBarcode.requestFocus();
+        txtBarcode.setText("");
+        txtDescription.setText("");
+        txtStock.setText("");
+        txtBarcode.setText("");
+        txtPrice.setText("");
+        txtCost.setText("");
+        txtBrand.setText("");
     }
 }

@@ -58,7 +58,5 @@ public class ProductDAO {
         return barcodes;
     }
 
-    public void clearFields(){
 
-    }
 }
