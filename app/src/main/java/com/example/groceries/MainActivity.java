@@ -4,30 +4,37 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    // Traer los valores del EditText
+    EditText txtBarcode, txtDescription, txtBrand, txtCost, txtPrice, txtStock;
+
+    Button btnSave;
+    ListView lvProducts;
+    //Product DAO
+    ProductDAO productDAO = new ProductDAO(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Traer los valores del EditText
-        EditText txtBarcode = findViewById(R.id.txt_barcode);
-        EditText txtDescription = findViewById(R.id.txt_description);
-        EditText txtBrand = findViewById(R.id.txt_brand);
-        EditText txtCost = findViewById(R.id.txt_cost);
-        EditText txtPrice = findViewById(R.id.txt_price);
-        EditText txtStock = findViewById(R.id.txt_stock);
+        txtBarcode = findViewById(R.id.txt_barcode);
+        txtDescription = findViewById(R.id.txt_description);
+        txtBrand = findViewById(R.id.txt_brand);
+        txtCost = findViewById(R.id.txt_cost);
+        txtPrice = findViewById(R.id.txt_price);
+        txtStock = findViewById(R.id.txt_stock);
 
-        Button btnSave = findViewById(R.id.btn_save);
-        ListView lvProducts = findViewById(R.id.lv_products);
+        btnSave = findViewById(R.id.btn_save);
+        lvProducts = findViewById(R.id.lv_products);
 
-        //Product DAO
-        ProductDAO productDAO = new ProductDAO(this);
+        updateList();
 
 
         //Listener
@@ -45,10 +52,20 @@ public class MainActivity extends AppCompatActivity {
                 
                 if (productDAO.insertProduct(product) != -1){
                     Toast.makeText(MainActivity.this, "Producto Insertado Exítosamente", Toast.LENGTH_SHORT).show();
+                    updateList();
                 } else {
                     Toast.makeText(MainActivity.this, "Servicio no disponible, vuelva a intentarlo", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+    protected  void updateList(){
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this,
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+                productDAO.getAllBarcodes()
+        );
+
+        lvProducts.setAdapter(adapter);
     }
 }
