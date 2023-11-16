@@ -2,8 +2,10 @@ package com.example.groceries;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +38,16 @@ public class MainActivity extends AppCompatActivity {
 
         updateList();
 
+        lvProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String barcode = lvProducts.getItemAtPosition(position).toString();
+
+                Intent intent = new Intent(MainActivity.this,ProductDetail.class);
+                intent.putExtra("barcode", barcode);
+                startActivity(intent);
+            }
+        });
 
         //Listener
         btnSave.setOnClickListener(new View.OnClickListener() {
